@@ -46,8 +46,9 @@ window.SW_CONTENT = {
   },
 
   links: [
-    { label: "LinkedIn", url: "" },
-    { label: "Instagram", url: "" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/company/sport-within/" },
+    { label: "Instagram", url: "https://www.instagram.com/sportwithin_/" },
+    { label: "Newsletter", url: "https://www.linkedin.com/newsletters/sport-within-7512761404760702976", title: "Sport Within Brief — weekly on LinkedIn" },
     { label: "YouTube", url: "" },
     { label: "Email", url: "mailto:" }, // filled from site.email
   ],

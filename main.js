@@ -184,6 +184,195 @@
     return h("li", { class: "sector" }, [bg, inner]);
   }));
 
+
+  /* ------------------------------------------------------------------
+     Orbit — scroll-driven story. The microphone (the podcast) sits at
+     the centre; rings draw in, sports join the orbit, the industry
+     appears around it, and the signal arc completes the circle.
+     ------------------------------------------------------------------ */
+  (function orbit() {
+    var section = document.querySelector("[data-orbit]");
+    if (!section) return;
+    var stage = section.querySelector(".orbit__stage");
+    var captions = section.querySelectorAll(".orbit__caption");
+    var steps = section.querySelectorAll(".orbit__steps li");
+    var NS = "http://www.w3.org/2000/svg";
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function s(tag, attrs, kids) {
+      var el = document.createElementNS(NS, tag);
+      Object.keys(attrs || {}).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+      (kids || []).forEach(function (c) { el.appendChild(c); });
+      return el;
+    }
+    function path(d, cls) { return s("path", cls ? { d: d, class: cls } : { d: d }); }
+
+    // Line-drawn balls, centred on 0,0 (radius ~30)
+    var BALLS = {
+      football: function () {
+        var g = [s("circle", { r: 30, class: "body" })], pts = [];
+        for (var i = 0; i < 5; i++) {
+          var a = (-90 + i * 72) * Math.PI / 180;
+          pts.push([Math.cos(a) * 10, Math.sin(a) * 10]);
+          g.push(s("line", { x1: Math.cos(a) * 10, y1: Math.sin(a) * 10, x2: Math.cos(a) * 25, y2: Math.sin(a) * 25 }));
+        }
+        g.push(s("polygon", { points: pts.map(function (p) { return p.join(","); }).join(" ") }));
+        return g;
+      },
+      basketball: function () {
+        return [s("circle", { r: 30, class: "body" }), path("M0 -30V30"), path("M-30 0H30"),
+          path("M-19 -23Q-6 0 -19 23"), path("M19 -23Q6 0 19 23")];
+      },
+      cricket: function () {
+        var g = [s("circle", { r: 30, class: "body" }), path("M-5 -29Q7 0 -5 29"), path("M5 -29Q17 0 5 29")];
+        [-18, -9, 0, 9, 18].forEach(function (y) { g.push(path("M" + (2 + Math.abs(y) * -0.12 + 5) + " " + y + "h-5")); });
+        return g;
+      },
+      tennis: function () {
+        return [s("circle", { r: 30, class: "body" }), path("M-20 -22Q-6 0 -20 22"), path("M20 -22Q6 0 20 22")];
+      },
+      golf: function () {
+        var g = [s("circle", { r: 28, class: "body" })];
+        for (var x = -16; x <= 16; x += 8) for (var y = -16; y <= 16; y += 8)
+          if (x * x + y * y <= 400) g.push(s("circle", { cx: x, cy: y, r: 1.7, class: "dotfill" }));
+        return g;
+      },
+      rugby: function () {
+        var g = [s("ellipse", { rx: 40, ry: 23, class: "body" }), path("M-15 0H15")];
+        [-10, -5, 0, 5, 10].forEach(function (x) { g.push(path("M" + x + " -5v10")); });
+        return [s("g", { transform: "rotate(-28)" }, g)];
+      },
+    };
+
+    // Rings: radius, rotation (deg across the whole scroll), balls at starting angles
+    var RINGS = [
+      { r: 120, spin: 0, balls: [] },
+      { r: 190, spin: 160, balls: [["football", -35], ["basketball", 160]] },
+      { r: 260, spin: -120, balls: [["tennis", 95], ["cricket", 215]] },
+      { r: 330, spin: 90, balls: [["rugby", 200], ["golf", 15]] },
+    ];
+    var SECTORS = ["Clubs", "Brands", "Agencies", "Media", "Technology", "Governance"];
+
+    // ---- Build the SVG
+    var svg = s("svg", { class: "orbit__svg", viewBox: "-480 -480 960 960", role: "presentation", focusable: "false" });
+    svg.appendChild(s("defs", {}, [
+      s("radialGradient", { id: "orbit-glow" }, [
+        s("stop", { offset: "0", "stop-color": "#FF5A1F", "stop-opacity": ".32" }),
+        s("stop", { offset: ".45", "stop-color": "#B39144", "stop-opacity": ".10" }),
+        s("stop", { offset: "1", "stop-color": "#0D3A2D", "stop-opacity": "0" }),
+      ]),
+    ]));
+    var world = s("g");
+    svg.appendChild(world);
+
+    var glow = s("circle", { r: 300, fill: "url(#orbit-glow)" });
+    world.appendChild(glow);
+
+    var ringEls = RINGS.map(function (ring) {
+      var g = s("g");
+      var circle = s("circle", { r: ring.r, class: "orbit__ring", pathLength: 1, "stroke-dasharray": "1 1", "stroke-dashoffset": 1, transform: "rotate(-90)" });
+      g.appendChild(circle);
+      var balls = ring.balls.map(function (b) {
+        var bg = s("g", { class: "orbit__ball" }, BALLS[b[0]]());
+        g.appendChild(bg);
+        return { el: bg, angle: b[1] };
+      });
+      world.appendChild(g);
+      return { ring: ring, circle: circle, balls: balls };
+    });
+
+    var outer = RINGS[RINGS.length - 1].r;
+    var progress = s("circle", { r: outer, class: "orbit__progress", pathLength: 1, "stroke-dasharray": "0 1", transform: "rotate(-90)" });
+    world.appendChild(progress);
+
+    // Industry labels around the outside
+    var labels = SECTORS.map(function (name, i) {
+      var a = (-90 + i * 60) * Math.PI / 180, cx = Math.cos(a), cy = Math.sin(a);
+      var lr = outer + 44;
+      var anchor = cx > 0.3 ? "start" : cx < -0.3 ? "end" : "middle";
+      var g = s("g", { opacity: 0 }, [
+        s("circle", { cx: cx * outer, cy: cy * outer, r: 5, class: "orbit__label-dot" }),
+        s("text", { x: cx * lr, y: cy * lr + (cy > 0.5 ? 14 : cy < -0.5 ? -4 : 5), "text-anchor": anchor, class: "orbit__label" }),
+      ]);
+      g.lastChild.textContent = name;
+      world.appendChild(g);
+      return g;
+    });
+
+    // The podcast: microphone, sound waves and a soft pulse
+    var waves = s("g", { opacity: 0 });
+    [52, 72].forEach(function (r) {
+      var a = 38 * Math.PI / 180, x = Math.cos(a) * r, y = Math.sin(a) * r;
+      waves.appendChild(path("M" + x + " " + (-y) + "A" + r + " " + r + " 0 0 1 " + x + " " + y, "orbit__wave"));
+      waves.appendChild(path("M" + (-x) + " " + (-y) + "A" + r + " " + r + " 0 0 0 " + (-x) + " " + y, "orbit__wave"));
+    });
+    world.appendChild(s("circle", { r: 60, class: "orbit__pulse" }));
+    world.appendChild(s("circle", { r: 60, class: "orbit__pulse" }));
+    world.appendChild(waves);
+    world.appendChild(s("g", { class: "orbit__mic", transform: "translate(0 -4) scale(1.05)" }, [
+      s("rect", { x: -20, y: -58, width: 40, height: 66, rx: 20 }),
+      path("M-11 -42H11", "grille"), path("M-11 -31H11", "grille"), path("M-11 -20H11", "grille"), path("M-11 -9H11", "grille"),
+      path("M-32 -12V-4A32 32 0 0 0 32 -4V-12"),
+      path("M0 28V48"), path("M-17 48H17"),
+    ]));
+    stage.appendChild(svg);
+
+    // ---- Animate
+    function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+    function seg(p, a, b) { return clamp((p - a) / (b - a)); }
+    function ease(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function render(p) {
+      world.setAttribute("transform", "scale(" + (0.62 + 0.38 * ease(seg(p, 0, 0.6))) + ")");
+      glow.setAttribute("opacity", (0.35 + 0.65 * seg(p, 0, 0.9)).toFixed(3));
+      waves.setAttribute("opacity", ease(seg(p, 0.02, 0.12)).toFixed(3));
+
+      ringEls.forEach(function (R, i) {
+        var draw = ease(seg(p, 0.02 + i * 0.08, 0.14 + i * 0.08));
+        R.circle.setAttribute("stroke-dashoffset", (1 - draw).toFixed(4));
+        var rot = R.ring.spin * p;
+        R.balls.forEach(function (b, j) {
+          var show = ease(seg(p, 0.22 + i * 0.05 + j * 0.02, 0.32 + i * 0.05 + j * 0.02));
+          var a = (b.angle + rot) * Math.PI / 180;
+          var x = Math.cos(a) * R.ring.r, y = Math.sin(a) * R.ring.r;
+          b.el.setAttribute("transform", "translate(" + x.toFixed(2) + " " + y.toFixed(2) + ") scale(" + (0.4 + 0.6 * show).toFixed(3) + ") rotate(" + (rot * 1.5).toFixed(1) + ")");
+          b.el.setAttribute("opacity", show.toFixed(3));
+        });
+      });
+
+      progress.setAttribute("stroke-dasharray", ease(seg(p, 0.04, 0.96)).toFixed(4) + " 1");
+      labels.forEach(function (g, i) { g.setAttribute("opacity", ease(seg(p, 0.5 + i * 0.03, 0.6 + i * 0.03)).toFixed(3)); });
+
+      var idx = Math.min(captions.length - 1, Math.floor(p * captions.length));
+      captions.forEach(function (c, i) { c.classList.toggle("is-active", i === idx); });
+      steps.forEach(function (li, i) { li.style.setProperty("--fill", clamp(p * steps.length - i).toFixed(3)); });
+      section.classList.toggle("is-started", p > 0.02);
+    }
+
+    if (reduce) { render(1); return; }
+
+    var target = 0, current = 0, running = false;
+    function measure() {
+      var r = section.getBoundingClientRect();
+      var total = section.offsetHeight - window.innerHeight;
+      target = total > 0 ? clamp(-r.top / total) : 0;
+    }
+    function tick() {
+      current += (target - current) * 0.12;   // gentle inertia
+      if (Math.abs(target - current) < 0.0005) current = target;
+      render(current);
+      running = current !== target;
+      if (running) requestAnimationFrame(tick);
+    }
+    function onScroll() {
+      measure();
+      if (!running) { running = true; requestAnimationFrame(tick); }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    measure(); current = target; render(current);
+  })();
+
   /* ------------------------------------------------------------------
      Photo credits (Unsplash licence doesn't require it — we do it anyway)
      ------------------------------------------------------------------ */
@@ -217,7 +406,7 @@
     if (!url) {
       return h("li", null, [h("span", null, [l.label, h("small", { text: "Soon" })])]);
     }
-    var attrs = { href: url, "data-track": "social_" + l.label.toLowerCase() };
+    var attrs = { href: url, title: l.title || null, "data-track": "social_" + l.label.toLowerCase() };
     if (external(url)) { attrs.target = "_blank"; attrs.rel = "noopener"; }
     return h("li", null, [h("a", attrs, [l.label])]);
   }));
