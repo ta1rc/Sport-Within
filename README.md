@@ -1,25 +1,69 @@
-# Sport Within — landing page
+# Sport Within
 
-Static site with no build step: `index.html`, `styles.css`, `main.js` and `content.js`.
+**Editorial landing page for Sport Within: a conversation-led platform about the people, ideas and decisions shaping the business of sport.**
+
+![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+![No build step](https://img.shields.io/badge/build-none-0D3A2D)
+
+![Sport Within hero](docs/hero.jpg)
+
+## Overview
+
+Sport Within is a student-led platform starting with a podcast and growing towards media, a professional network and events. The site has one job: when a senior sports executive opens it from a LinkedIn invitation, they should think *"this is considered and credible"* within seconds.
+
+It's a single page with no framework, no build step and no backend. It's fast, easy to host anywhere, and easy for a non-developer to update.
+
+## Highlights
+
+- **Scroll-driven story.** A microphone sits at the centre of an orbit. As you scroll, rings draw in, six sports join and rotate, the industry appears around them, and a signal-orange arc closes the circle. The message: a podcast at the core, more than a podcast around it. *(on the `orbit-redesign` branch)*
+- **Editorial design system.** Inter Tight and Newsreader type, a five-colour palette (paper, ink, pitch green, signal orange, brand gold) and magazine-style section labels.
+- **Content separated from layout.** Episodes, questions, industry sectors, photos and links live in [`content.js`](content.js), shaped like a headless-CMS schema. Switching an episode to `"live"` turns the "Coming soon" block into a Watch/Listen module.
+- **Honest by design.** Nothing links to a page that doesn't exist yet; unfinished channels show "Soon". The roadmap marks only today's stage as live.
+- **Responsive 4K photography.** Images come from Unsplash's CDN with `srcset`, from 640px on phones up to 3840px on large displays.
+- **Accessible.** Semantic headings, keyboard-friendly navigation and contact dialog, AA-contrast colours, and full support for `prefers-reduced-motion`.
+- **Analytics-ready.** CTA, episode, social and contact events are sent to GA4/GTM (`dataLayer`) or Plausible if either is installed.
+
+<p align="center"><img src="docs/orbit.jpg" alt="Orbit animation: microphone at the centre with sports and industry around it" width="900"></p>
 
 ## Run locally
-    python3 -m http.server 4173
 
-## Update content
-Edit `content.js`. It holds the episodes, questions, industry categories, vision stages, social links and contact settings.
-- Set an episode's `status` to `"live"` and add `thumbnail`, `videoUrl` and `audioUrl`. The Conversations section then becomes a "Latest conversation" block with Watch and Listen links.
-- Social links with an empty `url` show "Soon" instead of a link (no dead links).
+```bash
+git clone https://github.com/ta1rc/Sport-Within.git
+cd Sport-Within
+python3 -m http.server 4173
+```
 
-## Design system
-- **Colours:** Paper `#FAF7EF`, Ink `#15181A`, Pitch green `#0D3A2D`, Signal orange `#FF5A1F` (small orange text uses `#C2410C` for contrast), brand gold `#B39144` (logo dot).
-- **Fonts:** Inter Tight for headlines and labels, Newsreader for editorial lines.
-- **Photography:** 17 free Unsplash photos (Unsplash licence: free for commercial use). They're listed under `photos` in `content.js` and served from Unsplash's CDN at the right size for each screen, up to 3840px (4K). Change a photo by replacing its `id`. Photographers are credited in the footer.
+Then open http://localhost:4173. Any static file server works, for example `npx serve .`
 
-## Before launch
-1. Set `site.email` in `content.js` to the real branded address.
-2. Optional: set `site.formEndpoint` (e.g. Formspree) so the form sends directly. If it's empty, the form opens the visitor's email app with the message filled in.
-3. Add analytics (GA4/GTM or Plausible). CTA, episode, social and contact events already go to `dataLayer` / `plausible`.
-4. Set `og:image` to an absolute URL once the domain is known.
+## Project structure
+
+```
+index.html    page structure and fixed copy
+styles.css    design tokens, layout, components, motion
+content.js    editable content: episodes, questions, sectors, photos, links
+main.js       rendering, orbit animation, navigation, contact form, analytics
+assets/       logo, favicon, social share image
+docs/         README screenshots
+```
+
+## Updating content
+
+Edit `content.js`, then bump the `?v=` number on the CSS/JS links in `index.html` so returning visitors get the new files.
+
+| To change | Edit |
+|---|---|
+| Episode details, status, video/audio links | `episodes` |
+| The five questions | `questions` |
+| Industry sectors | `categories` |
+| A photo | the `id` in `photos` (any Unsplash photo) |
+| Social links, contact email, form endpoint | `links`, `site` |
 
 ## Deploy
-Drag the folder onto Netlify, Vercel or Cloudflare Pages, or use GitHub Pages.
+
+No build step: push to GitHub Pages (Settings → Pages → `main`, root), or drag the folder onto Netlify, Vercel or Cloudflare Pages.
+
+## Credits
+
+Photography by the Unsplash photographers credited in the site footer. Fonts by Google Fonts.
