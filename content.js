@@ -60,7 +60,9 @@ window.SW_CONTENT = {
       title: "When does a sports club become more than a sports club?",
       description:
         "A conversation about how a modern sports organisation expands beyond the game through commercial strategy, partnerships, experiences, community and new revenue opportunities.",
-      guest: { name: "Robert Oates", role: "Managing Director", organisation: "Leeds Rhinos" },
+      // Add the guest once confirmed, e.g. { name: "Jane Doe", role: "Commercial Director", organisation: "Club FC" }.
+      // Until then the site shows "Guest to be announced".
+      guest: null,
       topic: "Clubs",
       publishDate: "",
       cover: "rugby", // key from `photos`, or a URL to a real thumbnail once live

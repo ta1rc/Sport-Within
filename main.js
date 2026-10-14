@@ -103,6 +103,8 @@
   if (featured) {
     var live = featured.status === "live";
     var g = featured.guest || {};
+    var hasGuest = !!g.name;
+    var guestRole = [g.role, g.organisation].filter(Boolean).join(", ");
     var num = pad(featured.number);
 
     var coverPhoto = photos[featured.cover]
@@ -119,7 +121,9 @@
       ]),
       h("div", { class: "episode__cover-num" }, [num, h("span", { class: "dot" })]),
       h("div", { class: "episode__cover-foot" }, [
-        h("div", null, [h("strong", { text: g.name }), (g.role || "") + (g.organisation ? ", " + g.organisation : "")]),
+        hasGuest
+          ? h("div", null, [h("strong", { text: g.name }), guestRole])
+          : h("div", null, [h("strong", { text: "Guest to be announced" })]),
         h("span", { text: featured.topic || "" }),
       ]),
     ]);
@@ -142,8 +146,8 @@
         h("div", { class: "episode__guest" }, [
           h("div", { class: "episode__guest-inner" }, [
             h("span", { class: "episode__guest-kicker", text: "Guest · Episode " + num }),
-            h("span", { class: "episode__guest-name", text: g.name }),
-            h("span", { class: "episode__guest-role", text: [g.role, g.organisation].filter(Boolean).join(", ") }),
+            h("span", { class: "episode__guest-name", text: hasGuest ? g.name : "To be announced" }),
+            hasGuest && guestRole ? h("span", { class: "episode__guest-role", text: guestRole }) : null,
           ]),
           h("div", { class: "episode__ctas" }, ctas),
         ]),
