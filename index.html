@@ -7,23 +7,39 @@
   <meta name="description" content="Sport Within is a student-led sports business platform exploring the people, ideas, business and decisions shaping modern sport.">
   <meta name="keywords" content="sports business, sports sponsorship, sports marketing, sports commercialisation, sports finance, sports media, sports technology, sports strategy, sports management">
   <meta name="theme-color" content="#FAF7EF">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Fallback for hosts that can't send headers (e.g. GitHub Pages). The full policy is in _headers / vercel.json. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com; connect-src 'self' https://formspree.io; form-action 'self' https://formspree.io; base-uri 'self'; object-src 'none'; manifest-src 'self'">
+
+  <link rel="canonical" href="https://www.sportwithin.co.uk/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sport Within">
+  <meta property="og:url" content="https://www.sportwithin.co.uk/">
   <meta property="og:title" content="Sport Within | Beyond the Game. Inside the Industry.">
   <meta property="og:description" content="Conversations with the people shaping the business of sport.">
-  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:image" content="https://www.sportwithin.co.uk/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sport Within. Beyond the game. Inside the industry.">
   <meta property="og:locale" content="en_GB">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sport Within | Beyond the Game. Inside the Industry.">
+  <meta name="twitter:description" content="Conversations with the people shaping the business of sport.">
+  <meta name="twitter:image" content="https://www.sportwithin.co.uk/assets/og-image.png">
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=5">
 
   <script type="application/ld+json">
   {
@@ -32,11 +48,21 @@
     "name": "Sport Within",
     "slogan": "Beyond the game. Inside the industry.",
     "description": "A student-led sports business platform exploring the people, ideas, business and decisions shaping modern sport.",
-    "founder": { "@type": "Person", "name": "Sahil Deshpande" }
+    "url": "https://www.sportwithin.co.uk/",
+    "logo": "https://www.sportwithin.co.uk/assets/sport-within-logo.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/sport-within/",
+      "https://www.instagram.com/sportwithin_/"
+    ],
+    "founder": [
+      { "@type": "Person", "name": "Sahil Deshpande", "jobTitle": "Co-founder" },
+      { "@type": "Person", "name": "Devvrat Bhalerao", "jobTitle": "Co-founder" }
+    ]
   }
   </script>
 </head>
 <body>
+  <noscript><p class="noscript">This site works best with JavaScript turned on. You can still reach us at <a href="mailto:sportwithin@gmail.com">sportwithin@gmail.com</a>.</p></noscript>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- 01 · Header -->
@@ -81,7 +107,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero__grid">
         <div class="hero__copy">
-          <p class="eyebrow" data-load><span class="pulse" aria-hidden="true"></span> A sports business conversation platform</p>
+          <p class="eyebrow" data-load><span class="eyebrow__rule" aria-hidden="true"></span>A sports business conversation platform</p>
 
           <h1 class="hero__title" id="hero-title">
             <span class="hero__logo" data-load>
@@ -111,11 +137,6 @@
             sizes="(max-width: 860px) 100vw, 45vw"
             alt="A floodlit stadium at night, packed with supporters"
             width="1600" height="2000" fetchpriority="high">
-          <div class="hero__tag">
-            <span class="hero__tag-kicker">Episode 01 &middot; Coming soon</span>
-            <span class="hero__tag-title">When does a sports club become more than a sports club?</span>
-            <span class="hero__tag-guest">with Robert Oates, Leeds Rhinos</span>
-          </div>
           <figcaption class="fig-caption"><span>Fig. 01</span> Under the floodlights</figcaption>
         </figure>
       </div>
@@ -134,6 +155,40 @@
       </div>
     </section>
 
+    <!-- 02b · Orbit — scroll-driven story: a podcast at the centre, more than a podcast around it -->
+    <section class="orbit" aria-labelledby="orbit-title" data-orbit>
+      <div class="orbit__sticky">
+        <div class="wrap orbit__grid">
+          <div class="orbit__copy">
+            <h2 class="section-label section-label--inline" id="orbit-title"><span>00</span> Where it starts</h2>
+            <ol class="orbit__steps" aria-hidden="true">
+              <li></li><li></li><li></li><li></li>
+            </ol>
+            <div class="orbit__captions">
+              <div class="orbit__caption is-active">
+                <h3 class="orbit__title">It starts with a <em>conversation.</em></h3>
+                <p>Long-form conversations with the people working inside sport.</p>
+              </div>
+              <div class="orbit__caption">
+                <h3 class="orbit__title">Across every <em>sport.</em></h3>
+                <p>Football, rugby, cricket, basketball, tennis, golf &mdash; and the business that surrounds them all.</p>
+              </div>
+              <div class="orbit__caption">
+                <h3 class="orbit__title">Into the <em>industry.</em></h3>
+                <p>Clubs, brands, agencies, media, technology and governance &mdash; one industry, many perspectives.</p>
+              </div>
+              <div class="orbit__caption">
+                <h3 class="orbit__title">More than a <em>podcast.</em></h3>
+                <p>A network for the people shaping the next era of sport, built one conversation at a time.</p>
+              </div>
+            </div>
+          </div>
+          <div class="orbit__stage" aria-hidden="true"></div>
+        </div>
+        <p class="orbit__hint" aria-hidden="true">Scroll <span>&darr;</span></p>
+      </div>
+    </section>
+
     <!-- 03 · Editorial philosophy -->
     <section class="section section--pitch philosophy" aria-labelledby="philosophy-title">
       <div class="wrap grid">
@@ -141,7 +196,6 @@
         <div class="philosophy__content">
           <span class="signal-rule" aria-hidden="true"></span>
           <h2 class="display-caps" id="philosophy-title">We ask the questions behind the <span class="hl">spectacle.</span></h2>
-          <p class="philosophy__copy">Sport is more than what happens on the field. Behind every club, partnership and sporting moment is an industry shaped by people, strategy and business.</p>
         </div>
       </div>
       <div class="wrap">
@@ -188,19 +242,49 @@
       </div>
     </section>
 
-    <!-- 07 · Built from Within -->
+    <!-- 07 · Built from Within — the founders -->
     <section class="section section--paper about" id="about" aria-labelledby="about-title">
-      <div class="wrap grid about__grid">
-        <figure class="about__media" data-photo="floodlight" data-sizes="(max-width: 860px) 100vw, 34vw" data-caption="Fig. 02 · From the stands to the boardroom"></figure>
-        <div class="about__note">
-          <p class="section-label section-label--inline"><span>05</span> Built from Within</p>
-          <h2 class="section-title" id="about-title">Built from within sport.</h2>
-          <p class="about__copy">Sport Within is created and hosted by Sahil Deshpande, a sports business professional currently studying MSc Sport Business Management at Leeds Beckett University, with experience across sports science, operations, commercial development and sports education.</p>
-          <p class="signature">
-            <span class="signature__name">Sahil Deshpande</span>
-            <span class="signature__sep" aria-hidden="true"></span>
-            <span class="signature__role">Founder &amp; Host</span>
-          </p>
+      <div class="wrap grid">
+        <p class="section-label"><span>05</span> Built from Within</p>
+        <div class="section-head">
+          <h2 class="section-title" id="about-title">Built from within <em>sport.</em></h2>
+          <p class="about__lede">Sport Within is built by two co-founders completing their MSc in Sport Business Management at Leeds Beckett University. Millions follow sport. Very few see how it works. We connect both sides.</p>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="founders">
+          <article class="founder" aria-labelledby="founder-sahil">
+            <picture class="founder__photo">
+              <source srcset="assets/team/sahil-deshpande.webp" type="image/webp">
+              <img src="assets/team/sahil-deshpande.jpg" alt="Portrait of Sahil Deshpande" width="640" height="640" loading="lazy" decoding="async">
+            </picture>
+            <div class="founder__body">
+              <p class="founder__role">Co-founder</p>
+              <h3 class="founder__name" id="founder-sahil">Sahil Deshpande</h3>
+              <p class="founder__bio">Sahil has spent his career where sport meets business. He ran operations across seven fitness facilities, led a team of around 60 people, then moved into business development and launched his own ed-tech startup. Now completing his MSc in Sport Business Management at Leeds Beckett University, he is building Sport Within to open the industry&rsquo;s doors for the next generation of talent.</p>
+            </div>
+          </article>
+
+          <article class="founder" aria-labelledby="founder-devvrat">
+            <picture class="founder__photo">
+              <source srcset="assets/team/devvrat-bhalerao.webp" type="image/webp">
+              <img src="assets/team/devvrat-bhalerao.jpg" alt="Portrait of Devvrat Bhalerao" width="640" height="640" loading="lazy" decoding="async">
+            </picture>
+            <div class="founder__body">
+              <p class="founder__role">Co-founder</p>
+              <h3 class="founder__name" id="founder-devvrat">Devvrat Bhalerao</h3>
+              <p class="founder__bio">Devvrat has built his career where sport, brand and growth meet. He led marketing for the biggest cricket museum in India and brings a strong business development background to everything he does. Now completing his MSc in Sport Business Management at Leeds Beckett University, he is helping build Sport Within into the community the next generation of sport professionals needs.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="bridge" role="img" aria-label="Sport Within connects people inside the industry with people trying to get in">
+          <span class="bridge__end">People inside the industry</span>
+          <span class="bridge__line" aria-hidden="true"></span>
+          <span class="bridge__hub">Sport Within</span>
+          <span class="bridge__line" aria-hidden="true"></span>
+          <span class="bridge__end">People trying to get in</span>
         </div>
       </div>
     </section>
@@ -246,7 +330,7 @@
       <div class="site-footer__bottom">
         <p>&copy; <span data-year></span> Sport Within. All rights reserved.</p>
         <p class="credits" data-render="credits"></p>
-        <a href="#top" class="back-to-top">Back to top <span aria-hidden="true">&uarr;</span></a>
+        <p class="footer-links"><a href="privacy.html">Privacy</a> <a href="#top" class="back-to-top">Back to top <span aria-hidden="true">&uarr;</span></a></p>
       </div>
     </div>
   </footer>
@@ -267,26 +351,31 @@
         <div class="field-row">
           <div class="field">
             <label for="f-name">Name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required>
           </div>
           <div class="field">
             <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required>
+            <input id="f-email" name="email" type="email" autocomplete="email" maxlength="254" required>
           </div>
         </div>
         <div class="field-row">
           <div class="field">
             <label for="f-org">Organisation</label>
-            <input id="f-org" name="organisation" type="text" autocomplete="organization">
+            <input id="f-org" name="organisation" type="text" autocomplete="organization" maxlength="160">
           </div>
           <div class="field">
             <label for="f-role">Role</label>
-            <input id="f-role" name="role" type="text" autocomplete="organization-title">
+            <input id="f-role" name="role" type="text" autocomplete="organization-title" maxlength="120">
           </div>
         </div>
         <div class="field">
           <label for="f-message">Message</label>
-          <textarea id="f-message" name="message" rows="5" required></textarea>
+          <textarea id="f-message" name="message" rows="5" maxlength="4000" required></textarea>
+        </div>
+        <!-- Honeypot: hidden from people, filled in by bots. Formspree also recognises "_gotcha". -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="f-website">Leave this field empty</label>
+          <input id="f-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
         </div>
         <div class="contact-form__foot">
           <p class="form-status" role="status" aria-live="polite"></p>
@@ -296,7 +385,7 @@
     </div>
   </dialog>
 
-  <script src="content.js"></script>
-  <script src="main.js"></script>
+  <script src="content.js?v=4"></script>
+  <script src="main.js?v=3"></script>
 </body>
 </html>

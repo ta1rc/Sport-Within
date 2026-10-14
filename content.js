@@ -13,7 +13,7 @@ window.SW_CONTENT = {
   site: {
     // Branded address for guest and collaboration enquiries.
     // TODO: replace with the real Sport Within address before launch.
-    email: "hello@sportwithin.com",
+    email: "sportwithin@gmail.com",
     // Optional form backend (e.g. Formspree, Basin, Netlify Forms URL).
     // When empty, the contact form opens the visitor's email client instead.
     formEndpoint: "",
@@ -40,14 +40,14 @@ window.SW_CONTENT = {
     camera:     { id: "photo-1634949858593-c2279ffaffe1", by: "Taiki Ishikawa", alt: "A camera operator filming inside a stadium" },
     filming:    { id: "photo-1752166672729-3f4adf6d35b0", by: "Luke Miller", alt: "A videographer filming courtside" },
     pitch:      { id: "photo-1729843352938-0e10fbf96585", by: "Charles Kitenge", alt: "Top-down view of a football pitch" },
-    floodlight: { id: "photo-1782130056357-3339bb395a7a", by: "Deny Hill", alt: "A stadium floodlight tower against the sky" },
     aerial:     { id: "photo-1516242981651-2ee338449dea", by: "Pedro Menezes", alt: "Aerial view of a stadium in the city" },
     fog:        { id: "photo-1709078477781-3f885189ecbf", by: "Young Jeffrey", alt: "Floodlights cutting through fog at night" },
   },
 
   links: [
-    { label: "LinkedIn", url: "" },
-    { label: "Instagram", url: "" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/company/sport-within/" },
+    { label: "Instagram", url: "https://www.instagram.com/sportwithin_/" },
+    { label: "Newsletter", url: "https://www.linkedin.com/newsletters/sport-within-7512761404760702976", title: "Sport Within Brief — weekly on LinkedIn" },
     { label: "YouTube", url: "" },
     { label: "Email", url: "mailto:" }, // filled from site.email
   ],
