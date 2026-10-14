@@ -11,8 +11,6 @@
   --ink-2: #1C1F21;
   --pitch: #0D3A2D;
   --pitch-2: #124A39;
-  --pitch-deep: #072A20;     /* darkest green: the seam between orbit and philosophy */
-  --pitch-lift: #15583F;     /* brightest green: philosophy section's lower half */
   --signal: #FF5A1F;         /* lively accent — markers, buttons, large type */
   --signal-text: #C2410C;    /* AA-compliant orange for small text on paper */
   --gold: #B39144;           /* brand gold (logo dot) */
@@ -297,7 +295,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex; align-items: center;
   background:
     radial-gradient(60% 70% at 68% 50%, rgba(18, 74, 57, .95) 0%, rgba(13, 58, 45, 0) 70%),
-    linear-gradient(180deg, var(--pitch) 0%, var(--pitch) 55%, var(--pitch-deep) 100%);
+    var(--pitch);
 }
 .orbit__grid {
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap);
@@ -381,14 +379,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* ==========================================================================
    03 · Editorial philosophy (pitch green)
    ========================================================================== */
-.philosophy {
-  /* continues from the orbit's deep green and lifts gradually into a brighter pitch green */
-  background: linear-gradient(180deg,
-    var(--pitch-deep) 0%,
-    var(--pitch) 22%,
-    var(--pitch-2) 58%,
-    var(--pitch-lift) 100%);
-}
 .philosophy__content { grid-column: 4 / span 9; }
 .philosophy .display-caps { max-width: 14ch; }
 .band-figure { margin-top: clamp(64px, 8vw, 120px); }
