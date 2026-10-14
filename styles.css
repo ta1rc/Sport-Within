@@ -234,11 +234,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero__tagline {
   display: block; margin-top: clamp(28px, 3.6vw, 52px);
   font-family: var(--sans); font-weight: 800;
-  font-size: clamp(42px, 6.2vw, 100px); line-height: .98; letter-spacing: -0.045em;
+  font-size: clamp(42px, 6.2vw, 100px); line-height: 1; letter-spacing: -0.045em;
   max-width: 12ch; text-wrap: balance;
 }
 .hero__tagline em {
   display: block;
+  margin-top: .08em;                 /* clears the descenders of the line above (g, y) */
+  line-height: 1.08;
   font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; font-size: 1.04em;
   color: var(--pitch-2);
 }
@@ -587,7 +589,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .contact > .bg-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(21,24,26,.92) 0%, rgba(21,24,26,.7) 60%, rgba(21,24,26,.45) 100%); }
 .contact__content { grid-column: 4 / span 9; }
 .contact__title { font-weight: 800; font-size: clamp(46px, 7vw, 112px); line-height: .96; letter-spacing: -0.045em; max-width: 12ch; }
-.contact__title em { display: block; font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--signal); }
+.contact__title em { display: block; margin-top: .08em; line-height: 1.04; font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--signal); }
 .contact__copy { margin-top: clamp(28px, 3vw, 44px); max-width: 40ch; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; color: var(--on-dark-2); }
 .contact .btn { margin-top: clamp(32px, 3.6vw, 48px); }
 
@@ -742,6 +744,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 @media (max-width: 480px) {
+  .hero__tagline { letter-spacing: -0.035em; line-height: 1.04; }
+  .hero__tagline em { margin-top: .12em; }
+  .contact__title { line-height: 1.02; letter-spacing: -0.035em; }
+  .orbit__title, .section-title { line-height: 1.06; }
   .hero__ctas .btn { width: 100%; justify-content: space-between; }
   .contact .btn { width: 100%; justify-content: space-between; }
   .contact-dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; margin: 0; }
