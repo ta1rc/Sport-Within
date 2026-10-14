@@ -13,7 +13,7 @@ window.SW_CONTENT = {
   site: {
     // Branded address for guest and collaboration enquiries.
     // TODO: replace with the real Sport Within address before launch.
-    email: "hello@sportwithin.com",
+    email: "sportwithin@gmail.com",
     // Optional form backend (e.g. Formspree, Basin, Netlify Forms URL).
     // When empty, the contact form opens the visitor's email client instead.
     formEndpoint: "",

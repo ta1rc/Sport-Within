@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /docs/
 
-Sitemap: https://SITE_DOMAIN/sitemap.xml
+Sitemap: https://www.sportwithin.co.uk/sitemap.xml
