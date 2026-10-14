@@ -228,12 +228,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex; align-items: center; gap: 12px;
   font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--grey);
 }
-.pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--signal); flex: none; }
-.pulse::after {
-  content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1.5px solid var(--signal);
-  animation: pulse 2.4s var(--ease) infinite;
-}
-@keyframes pulse { 0% { transform: scale(.5); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+.eyebrow__rule { width: 28px; height: 3px; background: var(--signal); flex: none; }
 
 .hero__title { margin-top: clamp(40px, 7vh, 88px); font-weight: inherit; }
 .hero__logo { display: block; }
