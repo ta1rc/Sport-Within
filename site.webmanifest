@@ -1,0 +1,13 @@
+{
+  "name": "Sport Within",
+  "short_name": "Sport Within",
+  "description": "Conversations with the people shaping the business of sport.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#FAF7EF",
+  "theme_color": "#FAF7EF",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

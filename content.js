@@ -40,7 +40,6 @@ window.SW_CONTENT = {
     camera:     { id: "photo-1634949858593-c2279ffaffe1", by: "Taiki Ishikawa", alt: "A camera operator filming inside a stadium" },
     filming:    { id: "photo-1752166672729-3f4adf6d35b0", by: "Luke Miller", alt: "A videographer filming courtside" },
     pitch:      { id: "photo-1729843352938-0e10fbf96585", by: "Charles Kitenge", alt: "Top-down view of a football pitch" },
-    floodlight: { id: "photo-1782130056357-3339bb395a7a", by: "Deny Hill", alt: "A stadium floodlight tower against the sky" },
     aerial:     { id: "photo-1516242981651-2ee338449dea", by: "Pedro Menezes", alt: "Aerial view of a stadium in the city" },
     fog:        { id: "photo-1709078477781-3f885189ecbf", by: "Young Jeffrey", alt: "Floodlights cutting through fog at night" },
   },

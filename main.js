@@ -459,9 +459,12 @@
   var dialog = document.getElementById("contact-dialog");
   var form = dialog.querySelector(".contact-form");
   var status = form.querySelector(".form-status");
+  var submitBtn = form.querySelector('[type="submit"]');
   var lastFocus = null;
 
+  var openedAt = 0;   // used to ignore forms submitted faster than a person could type
   function openDialog() {
+    openedAt = Date.now();
     lastFocus = document.activeElement;
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
@@ -502,14 +505,30 @@
       return;
     }
 
-    var data = Object.fromEntries(new FormData(form).entries());
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = String(v).trim(); });
+
+    // Spam protection: bots fill the hidden honeypot or submit within a couple of seconds.
+    // Pretend it worked so they don't retry, but send nothing.
+    if (data._gotcha || Date.now() - openedAt < 2500) {
+      form.reset();
+      setStatus("Thank you — your message has been sent.", "success");
+      return;
+    }
+    delete data._gotcha;
 
     if (site.formEndpoint) {
+      if (form.dataset.sending) return;          // no double submits
+      form.dataset.sending = "1";
+      submitBtn.disabled = true;
       setStatus("Sending…");
+      var ctrl = "AbortController" in window ? new AbortController() : null;
+      var timer = ctrl && setTimeout(function () { ctrl.abort(); }, 15000);
       fetch(site.formEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
+        signal: ctrl ? ctrl.signal : undefined,
       }).then(function (r) {
         if (!r.ok) throw new Error(r.status);
         track("contact_submitted", { method: "form" });
@@ -517,6 +536,10 @@
         setStatus("Thank you — your message has been sent.", "success");
       }).catch(function () {
         setStatus("Something went wrong. Please email " + site.email + " directly.", "error");
+      }).then(function () {
+        if (timer) clearTimeout(timer);
+        delete form.dataset.sending;
+        submitBtn.disabled = false;
       });
       return;
     }
